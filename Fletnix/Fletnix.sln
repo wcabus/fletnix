@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fletnix.Domain", "Fletnix.Domain\Fletnix.Domain.csproj", "{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fletnix.EF", "Fletnix.EF\Fletnix.EF.csproj", "{8411F284-5AB3-4A14-8E34-6AD98B8DAD6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fletnix.Web", "Fletnix.Web\Fletnix.Web.csproj", "{58EE8AB2-F1DE-4CD6-908B-31101ED39894}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fletnix.Web.Tests", "Fletnix.Web.Tests\Fletnix.Web.Tests.csproj", "{D9667589-F21C-44C5-9842-FE6A434C5410}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8411F284-5AB3-4A14-8E34-6AD98B8DAD6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8411F284-5AB3-4A14-8E34-6AD98B8DAD6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8411F284-5AB3-4A14-8E34-6AD98B8DAD6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8411F284-5AB3-4A14-8E34-6AD98B8DAD6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58EE8AB2-F1DE-4CD6-908B-31101ED39894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58EE8AB2-F1DE-4CD6-908B-31101ED39894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58EE8AB2-F1DE-4CD6-908B-31101ED39894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58EE8AB2-F1DE-4CD6-908B-31101ED39894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9667589-F21C-44C5-9842-FE6A434C5410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9667589-F21C-44C5-9842-FE6A434C5410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9667589-F21C-44C5-9842-FE6A434C5410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9667589-F21C-44C5-9842-FE6A434C5410}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
