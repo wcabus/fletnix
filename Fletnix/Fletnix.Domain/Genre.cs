@@ -8,7 +8,7 @@ namespace Fletnix.Domain
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required, StringLength(32)]
+        [Required, StringLength(50)]
         public string Name { get; set; }
     }
 }

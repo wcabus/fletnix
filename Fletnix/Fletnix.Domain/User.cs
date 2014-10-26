@@ -5,6 +5,7 @@ namespace Fletnix.Domain
 {
     public class User
     {
+        [Required, StringLength(40)]
         public string Id { get; set; }
 
         [EmailAddress, Required, StringLength(512)]
@@ -17,5 +18,7 @@ namespace Fletnix.Domain
         public string LastName { get; set; }
 
         public DateTime MemberSince { get; set; }
+
+        public virtual Subscription Subscription { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Fletnix.Domain
         public Guid StreamId { get; set; }
 
         [EnumDataType(typeof(MediaStreamType))]
-        public int MediaStreamTypeId { get; set; }
+        public MediaStreamType MediaStreamTypeId { get; set; }
 
         public TimeSpan Length { get; set; }
 
@@ -22,10 +22,13 @@ namespace Fletnix.Domain
 
         public string Synopsis { get; set; }
 
+        [StringLength(1024)]
         public string ImageUri { get; set; }
 
         public virtual ICollection<Genre> Genres { get; set; }
 
         public virtual ICollection<CastMember> Cast { get; set; }
+
+        public virtual ShowSeason ShowSeason { get; set; }
     }
 }

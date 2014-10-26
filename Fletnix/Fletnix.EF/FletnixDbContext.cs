@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using Fletnix.Domain;
+using Fletnix.EF.Mapping;
 
 namespace Fletnix.EF
 {
@@ -10,33 +10,25 @@ namespace Fletnix.EF
             //Disable lazy loading and proxy creation
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
-
-            //Database initialization
-            Database.SetInitializer(new DbInitializer());
         }
 
-        public DbSet<User> Users { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        public DbSet<SubscriptionOptionTemplate> SubscriptionOptionTemplates { get; set; }
+            modelBuilder.Configurations.Add(new GenreMap());
+            modelBuilder.Configurations.Add(new MediaRoleMap());
+            modelBuilder.Configurations.Add(new CelebrityMap());
+            modelBuilder.Configurations.Add(new TvShowMap());
+            modelBuilder.Configurations.Add(new ShowSeasonMap());
+            modelBuilder.Configurations.Add(new MediaStreamMap());
+            modelBuilder.Configurations.Add(new CastMemberMap());
 
-        public DbSet<SubscriptionModel> SubscriptionModels { get; set; }
-
-        public DbSet<SubscriptionOption> SubscriptionOptions { get; set; }
-
-        public DbSet<Subscription> Subscriptions { get; set; }
-
-        public DbSet<Genre> Genres { get; set; }
-
-        public DbSet<MediaRole> MediaRoles { get; set; }
-
-        public DbSet<Celebrity> Celibrities { get; set; }
-
-        public DbSet<CastMember> CastMembers { get; set; }
-
-        public DbSet<TvShow> TvShows { get; set; }
-        
-        public DbSet<ShowSeason> ShowSeasons { get; set; }
-
-        public DbSet<MediaStream> MediaStreams { get; set; }
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new SubscriptionModelMap());
+            modelBuilder.Configurations.Add(new SubscriptionOptionTemplateMap());
+            modelBuilder.Configurations.Add(new SubscriptionOptionMap());
+            modelBuilder.Configurations.Add(new SubscriptionMap());
+        }
     }
 }

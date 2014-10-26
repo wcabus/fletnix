@@ -9,7 +9,7 @@ namespace Fletnix.Domain
         public int Id { get; set; }
 
         [Required, EnumDataType(typeof(OptionType))]
-        public int OptionTypeId { get; set; }
+        public OptionType OptionTypeId { get; set; }
 
         [Required, StringLength(32)]
         public string Name { get; set; }

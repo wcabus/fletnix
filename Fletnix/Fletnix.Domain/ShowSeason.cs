@@ -6,7 +6,7 @@ namespace Fletnix.Domain
 {
     public class ShowSeason
     {
-        [Key, ForeignKey("TvShow")]
+        [Key]
         public int TvShowId { get; set; }
 
         [Key, Required, Range(1, 999)]
