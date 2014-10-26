@@ -14,26 +14,46 @@
         case OptionType.Boolean:
             var @boolCssClass = (option.Value == bool.TrueString) ? "glyphicon-ok" : "glyphicon-remove";
             var @color = (option.Value == bool.TrueString) ? "green" : "gray";
-            
+
             <i class="glyphicon @boolCssClass @color"></i>
             break;
         case OptionType.Numeric:
-            @option.Value
+        @option.Value
             break;
     }
 }
 
 <div class="row">
-    @foreach(var item in Model) {
+    <div class="col-md-12">
+        <h2>Choose the plan that's right for you</h2>
+        <p class="lead">Downgrade or upgrade at any time</p>
+    </div>
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
         <div class="col-md-4">
             <h2 class="text-center">@item.Name</h2>
             <div class="row">
-                @foreach(var option in item.Options) {
+                @foreach (var option in item.Options)
+                {
                     <div class="col-md-10">@GetDescriptionThenName(option.SubscriptionOptionTemplate)</div>
                     <div class="col-md-2 text-right">@FormatValue(option)</div>
                 }
             </div>
             <h3 class="text-center">@item.Price.ToString("C2")</h3>
+            <div class="text-center">
+                @Html.ActionLink("Subscribe now", "Start", "Subscription", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </div>
         </div>
     }
+</div>
+<div class="row">
+    <br />
+    <div class="col-md-12 gray">
+        HD and Ultra HD availability subject to your internet service and device capabilities.<br />
+        Not all content is available in HD or Ultra HD.<br />
+        <br />
+        See Terms of Use for more details.
+    </div>
 </div>
