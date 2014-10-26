@@ -2,7 +2,7 @@
 {
     public enum MediaStreamType
     {
-        Episode,
-        Movie
+        Episode = 1,
+        Movie = 2
     }
 }

@@ -1,17 +1,25 @@
 ﻿@using Fletnix.Domain
-@model IEnumerable<Fletnix.Domain.SubscriptionModel>
+@model IEnumerable<SubscriptionModel>
 @{
     ViewBag.Title = "";
 }
 @helper GetDescriptionThenName(SubscriptionOptionTemplate optionTemplate)
 {
-    if (string.IsNullOrEmpty(optionTemplate.Description))
+    @(string.IsNullOrEmpty(optionTemplate.Description) ? optionTemplate.Name : optionTemplate.Description)
+}
+@helper FormatValue(SubscriptionOption option)
+{
+    switch (option.SubscriptionOptionTemplate.OptionTypeId)
     {
-        @optionTemplate.Name
-    }
-    else
-    {
-        @optionTemplate.Description
+        case OptionType.Boolean:
+            var @boolCssClass = (option.Value == bool.TrueString) ? "glyphicon-ok" : "glyphicon-remove";
+            var @color = (option.Value == bool.TrueString) ? "green" : "gray";
+            
+            <i class="glyphicon @boolCssClass @color"></i>
+            break;
+        case OptionType.Numeric:
+            @option.Value
+            break;
     }
 }
 
@@ -19,12 +27,12 @@
     @foreach(var item in Model) {
         <div class="col-md-4">
             <h2 class="text-center">@item.Name</h2>
-            <dl>
+            <div class="row">
                 @foreach(var option in item.Options) {
-                    <dt>@GetDescriptionThenName(option.SubscriptionOptionTemplate)</dt>
-                    <dd>@option.Value</dd>
+                    <div class="col-md-10">@GetDescriptionThenName(option.SubscriptionOptionTemplate)</div>
+                    <div class="col-md-2 text-right">@FormatValue(option)</div>
                 }
-            </dl>
+            </div>
             <h3 class="text-center">@item.Price.ToString("C2")</h3>
         </div>
     }

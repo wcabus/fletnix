@@ -2,7 +2,7 @@
 {
     public enum OptionType
     {
-        Boolean,
-        Numeric
+        Boolean = 1,
+        Numeric = 2
     }
 }
