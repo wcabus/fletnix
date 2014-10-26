@@ -8,10 +8,6 @@ namespace Fletnix.EF.Mapping
         public ShowSeasonMap()
         {
             ToTable("ShowSeason");
-
-            HasMany(s => s.Episodes).
-                WithOptional(m => m.ShowSeason).
-                Map(m => m.MapKey("TvShowId", "Season"));
         }
     }
 }

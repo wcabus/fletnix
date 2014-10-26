@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Fletnix.Domain;
+using Fletnix.Domain.Repositories;
 
 namespace Fletnix.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private IBaseRepository<SubscriptionModel> _subscriptionModelRepository;
+
+        public HomeController(IBaseRepository<SubscriptionModel> subscriptionModelRepository)
         {
-            return View();
+            _subscriptionModelRepository = subscriptionModelRepository;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            return View(await _subscriptionModelRepository.Get().Include("Options.SubscriptionOptionTemplate").ToListAsync());
         }
 
         public ActionResult About()

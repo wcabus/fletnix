@@ -6,10 +6,10 @@ namespace Fletnix.Domain
 {
     public class ShowSeason
     {
-        [Key]
+        [Key, Column(Order = 1)]
         public int TvShowId { get; set; }
 
-        [Key, Required, Range(1, 999)]
+        [Key, Column(Order = 2), Required, Range(1, 999)]
         public int Season { get; set; }
 
         public virtual TvShow TvShow { get; set; }

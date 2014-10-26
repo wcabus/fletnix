@@ -11,7 +11,13 @@ namespace Fletnix.EF.Mapping
 
             HasRequired(s => s.SubscriptionModel).
                 WithMany().
-                Map(m => m.MapKey("SubscriptionModelId"));
+                HasForeignKey(s => s.SubscriptionModelId);
+
+            // This is bad... You can't specify HasRequired.WithOptional.HasForeignKey, but only .Map at the end which doesn't work in this case.
+            HasRequired(s => s.User).
+                WithMany().
+                HasForeignKey(s => s.UserId);
+
         }
     }
 }

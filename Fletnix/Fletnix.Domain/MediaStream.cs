@@ -29,6 +29,8 @@ namespace Fletnix.Domain
 
         public virtual ICollection<CastMember> Cast { get; set; }
 
+        public int? TvShowId { get; set; }
+        public int? Season { get; set; }
         public virtual ShowSeason ShowSeason { get; set; }
     }
 }

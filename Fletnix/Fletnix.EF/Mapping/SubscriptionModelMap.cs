@@ -11,7 +11,7 @@ namespace Fletnix.EF.Mapping
 
             HasMany(s => s.Options).
                 WithRequired(o => o.SubscriptionModel).
-                Map(m => m.MapKey("SubscriptionModelId")).WillCascadeOnDelete();
+                HasForeignKey(o => o.SubscriptionModelId).WillCascadeOnDelete();
         }
     }
 }

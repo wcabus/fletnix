@@ -9,8 +9,8 @@ namespace Fletnix.EF.Mapping
         {
             ToTable("CastMember");
 
-            HasRequired(c => c.Celebrity).WithMany().Map(m => m.MapKey("CelebrityId"));
-            HasRequired(c => c.MediaRole).WithMany().Map(m => m.MapKey("MediaRoleId"));
+            HasRequired(c => c.Celebrity).WithMany().HasForeignKey(c => c.CelebrityId);
+            HasRequired(c => c.MediaRole).WithMany().HasForeignKey(c => c.MediaRoleId);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Fletnix.EF.Mapping
 
             HasRequired(o => o.SubscriptionOptionTemplate).
                 WithMany().
-                Map(m => m.MapKey("SubscriptionOptionTemplateId"));
+                HasForeignKey(o => o.SubscriptionOptionTemplateId);
         }
     }
 }
