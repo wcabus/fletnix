@@ -30,9 +30,14 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-md-1"></div>
+    @{
+        var odd = false;
+    }
     @foreach (var item in Model)
     {
-        <div class="col-md-4">
+        odd = !odd;
+        <div class="col-md-3 subscription-model @(odd ? "subscription-model-odd" : "subscription-model-even")">
             <h2 class="text-center">@item.Name</h2>
             <div class="row">
                 @foreach (var option in item.Options)
@@ -45,15 +50,18 @@
             <div class="text-center">
                 @Html.ActionLink("Subscribe now", "Start", "Subscription", new { id = item.Id }, new { @class = "btn btn-primary" })
             </div>
+            <br />
         </div>
     }
-</div>
-<div class="row">
-    <br />
+    <div class="col-md-1"></div>
+    <div class="col-md-12">
+        <br /><br />
+    </div>
     <div class="col-md-12 gray">
         HD and Ultra HD availability subject to your internet service and device capabilities.<br />
         Not all content is available in HD or Ultra HD.<br />
         <br />
-        See Terms of Use for more details.
+        See Terms of Use for more details.<br />
+        <br />
     </div>
 </div>

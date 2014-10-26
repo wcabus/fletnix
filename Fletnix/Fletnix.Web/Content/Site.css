@@ -23,10 +23,51 @@ textarea {
     max-width: 280px;
 }
 
+body.landing {
+    background: url("/Content/Images/landing.jpg");
+    -ms-background-size: cover;
+    background-size: cover;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+}
+
+.body-content.landing {
+    background: #FFFFFF;
+    background: rgba(255, 255, 255, .7);
+}
+
 .green {
     color: green;
 }
 
 .gray {
-    color: silver;
+    color: #464646;
+}
+
+.subscription-model {
+    background: #b0e0e6;
+    background: rgba(176, 224, 230, .2);
+    border: 1px solid steelblue;
+    margin: 0 6px;
+    padding: 0 -6px;
+}
+
+.subscription-model-even {
+    background: #008000;
+    background: rgba(0, 128, 0, .3);
+    border: 1px solid #006400;
+    margin: 0 3px;
+    padding: 0 -3px;
+    font-size: 1.3em;
+}
+
+footer {
+    background: #000000;
+    background: rgba(0, 0, 0, .6);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 1em;
 }

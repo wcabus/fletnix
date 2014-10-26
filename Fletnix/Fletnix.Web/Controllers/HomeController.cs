@@ -21,6 +21,7 @@ namespace Fletnix.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
+            ViewBag.Landing = "landing";
             return View(await _subscriptionModelRepository.Get().Include("Options.SubscriptionOptionTemplate").ToListAsync());
         }
 
