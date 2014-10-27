@@ -13,7 +13,7 @@ namespace Fletnix.EF.Mapping
             HasMany(m => m.Cast).WithRequired(c => c.MediaStream).HasForeignKey(c => c.MediaStreamId).WillCascadeOnDelete();
 
             HasOptional(m => m.ShowSeason).
-                WithMany().
+                WithMany(s => s.Episodes).
                 HasForeignKey(m => new { m.TvShowId, m.Season });
         }
     }
