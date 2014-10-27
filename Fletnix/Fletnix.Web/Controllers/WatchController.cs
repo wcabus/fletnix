@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using Fletnix.Domain.Services;
 using Fletnix.Web.Models;
 using Microsoft.AspNet.Identity;
@@ -43,7 +42,8 @@ namespace Fletnix.Web.Controllers
         [Route("~/Details/TvShow/{id:int}")]
         public async Task<ActionResult> TvShowDetails(int id)
         {
-            return View();
+            var tvShow = await _videoService.GetTvShowAsync(id);
+            return View(tvShow);
         }
 
         public async Task<ActionResult> Details(int id)

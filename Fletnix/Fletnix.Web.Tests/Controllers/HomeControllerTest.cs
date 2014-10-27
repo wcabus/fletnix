@@ -19,7 +19,7 @@ namespace Fletnix.Web.Tests.Controllers
             HomeController controller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = controller.Index().Result as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -1,0 +1,41 @@
+﻿@model Fletnix.Domain.TvShow
+@{
+    ViewBag.Title = "TV Show Details";
+    var first = true;
+}
+@helper FormatDuration(TimeSpan duration)
+{
+    if (duration.Hours > 0)
+    {
+        @duration.Hours @:h
+    }
+
+    @duration.Minutes @:m
+}
+
+<h2>@Model.Title</h2>
+
+<div class="panel-group" id="seasons">
+    @foreach (var season in Model.Seasons)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#seasons" href="#@string.Format("season{0}", season.Season)">
+                        Season @season.Season
+                    </a>
+                </h4>
+            </div>
+            <div id="@string.Format("season{0}", season.Season)" class="panel-collapse collapse @(first ? "in" : "")">
+                <div class="panel-body">
+                    @foreach (var episode in season.Episodes)
+                    {
+                        Html.RenderPartial("Details", episode);
+                    }
+                </div>
+            </div>
+        </div>
+
+        first = false;
+    }
+</div>

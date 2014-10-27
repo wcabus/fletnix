@@ -265,6 +265,7 @@
     <Content Include="Views\Subscription\Start.cshtml" />
     <Content Include="Views\Watch\Index.cshtml" />
     <Content Include="Views\Watch\Details.cshtml" />
+    <Content Include="Views\Watch\TvShowDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

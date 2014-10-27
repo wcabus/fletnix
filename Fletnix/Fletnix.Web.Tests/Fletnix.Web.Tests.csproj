@@ -92,6 +92,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fletnix.Domain\Fletnix.Domain.csproj">
+      <Project>{455DC87B-68E0-497B-BCB9-C8AF0E3A153E}</Project>
+      <Name>Fletnix.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fletnix.Web\Fletnix.Web.csproj">
       <Project>{58EE8AB2-F1DE-4CD6-908B-31101ED39894}</Project>
       <Name>Fletnix.Web</Name>
