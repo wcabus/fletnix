@@ -1,12 +1,18 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    background: #ededed;
+}
+
+div.navbar {
+    background: #c0c0c0;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 body.landing {
@@ -56,11 +62,14 @@ footer {
     background: #000000;
     background: rgba(0, 0, 0, .6);
     color: white;
-    position: absolute;
-    bottom: 0;
     width: 100%;
     margin: 0;
     padding: 1em;
+}
+
+footer.fixed {
+    position: fixed;
+    bottom: 0;
 }
 
 .btn-fb {

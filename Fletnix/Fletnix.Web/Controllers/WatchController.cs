@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fletnix.Domain.Services;
+using Fletnix.Web.Models;
 using Microsoft.AspNet.Identity;
 
 namespace Fletnix.Web.Controllers
@@ -9,10 +10,12 @@ namespace Fletnix.Web.Controllers
     public class WatchController : Controller
     {
         private readonly ISubscriptionService _subscriptionService;
+        private readonly IVideoService _videoService;
 
-        public WatchController(ISubscriptionService subscriptionService)
+        public WatchController(ISubscriptionService subscriptionService, IVideoService videoService)
         {
             _subscriptionService = subscriptionService;
+            _videoService = videoService;
         }
 
         // GET: Watch
@@ -24,7 +27,10 @@ namespace Fletnix.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            var movies = await _videoService.GetMoviesAsync();
+            var tvShows = await _videoService.GetTvShowsAsync();
+
+            return View(new DashboardViewModel { Movies = movies, TvShows = tvShows });
         }
     }
 }

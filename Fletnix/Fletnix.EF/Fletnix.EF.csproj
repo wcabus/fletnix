@@ -63,6 +63,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\SubscriptionModelRepository.cs" />
     <Compile Include="Services\SubscriptionService.cs" />
+    <Compile Include="Services\VideoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -22,6 +22,7 @@ namespace Fletnix.Web
 
             //Services
             builder.RegisterType<SubscriptionService>().AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterType<VideoService>().AsImplementedInterfaces().InstancePerRequest();
 
             builder.RegisterModelBinderProvider();
             builder.RegisterModelBinders();

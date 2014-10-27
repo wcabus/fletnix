@@ -49,6 +49,7 @@
     <Compile Include="MediaRole.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Services\ISubscriptionService.cs" />
+    <Compile Include="Services\IVideoService.cs" />
     <Compile Include="ShowSeason.cs" />
     <Compile Include="Subscription.cs" />
     <Compile Include="SubscriptionModel.cs" />

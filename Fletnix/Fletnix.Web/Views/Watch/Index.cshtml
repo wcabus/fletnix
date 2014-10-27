@@ -1,5 +1,33 @@
-﻿@{
+﻿@model Fletnix.Web.Models.DashboardViewModel
+@{
     ViewBag.Title = "Dashboard";
 }
 
 <h2>Dashboard</h2>
+<h3>Movies</h3>
+<div class="row">
+    @foreach (var movie in Model.Movies)
+    {
+        <div class="col-md-2">
+            <h4>@movie.Title</h4>
+            @if (!string.IsNullOrEmpty(movie.ImageUri))
+            {
+                <img src="@movie.ImageUri" alt="@movie.Title" />
+            }
+        </div>
+    }
+</div>
+
+<h3>TV Shows</h3>
+<div class="row">
+    @foreach (var tvShow in Model.TvShows)
+    {
+        <div class="col-md-2">
+            <h4>@tvShow.Title</h4>
+            @if (!string.IsNullOrEmpty(tvShow.ImageUri))
+            {
+                <img src="@tvShow.ImageUri" alt="@tvShow.Title" />
+            }
+        </div>
+    }
+</div>
