@@ -18,7 +18,7 @@ namespace Fletnix.Domain
         public string LastName { get; set; }
 
         public DateTime MemberSince { get; set; }
-
+        
         public virtual Subscription Subscription { get; set; }
     }
 }

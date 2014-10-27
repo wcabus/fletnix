@@ -14,7 +14,7 @@ namespace Fletnix.EF.Mapping
                 Map(m => m.MapKey("SubscriptionModelId"));
 
             HasRequired(s => s.User).
-                WithOptional().
+                WithOptional(u => u.Subscription).
                 Map(m => m.MapKey("UserId"));
 
         }

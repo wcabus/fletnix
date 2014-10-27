@@ -5,46 +5,46 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-    <div class="center-block landing">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-            {
-                <h2>@ViewBag.Title</h2>
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email)
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+<div class="center-block landing">
+    <section id="loginForm">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+        {
+            <h2>@ViewBag.Title</h2>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <p class="form-control-static text-right">
+                @Html.ActionLink("Forgot your email or password?", "ForgotPassword")
+            </p>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label for="@Html.IdFor(m => m.RememberMe)">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                </div>
-                <p class="form-control-static text-right">
-                    @Html.ActionLink("Forgot your email or password?", "ForgotPassword")
-                </p>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label for="@Html.IdFor(m => m.RememberMe)">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" value="Sign in" class="btn btn-block btn-danger">Sign in</button>
-                </div>
-                <div class="form-group">
-                    <button type="submit" value="Sign in" class="btn btn-block btn-fb"><i class="fa fa-facebook-square"></i> Login with Facebook</button>
-                </div>
-                <p>
-                    New to Fletnix? @Html.ActionLink("Sign up now.", "Register")
-                </p>
-            }
-        </section>
-    </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Sign in" class="btn btn-block btn-danger">Sign in</button>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Sign in" class="btn btn-block btn-fb"><i class="fa fa-facebook-square"></i> Login with Facebook</button>
+            </div>
+            <p>
+                New to Fletnix? @Html.ActionLink("Sign up now.", "Register")
+            </p>
+        }
+    </section>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
