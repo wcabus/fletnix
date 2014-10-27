@@ -9,20 +9,6 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 body.landing {
     background: url("/Content/Images/landing.jpg");
     -ms-background-size: cover;
@@ -31,9 +17,14 @@ body.landing {
     background-repeat: no-repeat;
 }
 
-.body-content.landing {
+.body-content.landing, .center-block.landing {
     background: #FFFFFF;
     background: rgba(255, 255, 255, .7);
+}
+
+.center-block.landing {
+    width: 20%;
+    padding: 6px 12px;
 }
 
 .green {
@@ -41,12 +32,12 @@ body.landing {
 }
 
 .gray {
-    color: #464646;
+    color: #202020;
 }
 
 .subscription-model {
     background: #b0e0e6;
-    background: rgba(176, 224, 230, .2);
+    background: rgba(176, 224, 230, .6);
     border: 1px solid steelblue;
     margin: 0 6px;
     padding: 0 -6px;
@@ -54,7 +45,7 @@ body.landing {
 
 .subscription-model-even {
     background: #008000;
-    background: rgba(0, 128, 0, .3);
+    background: rgba(128, 192, 128, .6);
     border: 1px solid #006400;
     margin: 0 3px;
     padding: 0 -3px;
@@ -70,4 +61,14 @@ footer {
     width: 100%;
     margin: 0;
     padding: 1em;
+}
+
+.btn-fb {
+    background: #3b5998;
+    color: white;
+}
+
+.btn-fb:hover {
+    background: #8b9dc3;
+    color: white;
 }
