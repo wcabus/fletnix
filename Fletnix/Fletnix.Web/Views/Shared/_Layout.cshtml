@@ -15,7 +15,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="@ViewBag.Landing">
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top navbar-transparent">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,14 +23,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Fletnix", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+                    <img src="/Content/Images/Fletnix.png" alt="Fletnix" />
+                </a>
             </div>
             <div class="navbar-collapse collapse">
                 @*<ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>*@
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>*@
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

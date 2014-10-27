@@ -7,6 +7,11 @@ div.navbar {
     background: #c0c0c0;
 }
 
+div.navbar.navbar-transparent {
+    background: transparent;
+}
+
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
