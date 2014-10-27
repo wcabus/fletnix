@@ -81,3 +81,17 @@ footer.fixed {
     background: #8b9dc3;
     color: white;
 }
+
+.btn-media {
+    white-space: initial;
+    height: 400px;
+    border: 3px solid transparent;
+}
+
+.btn-media:hover {
+    border: 3px solid #8b9dc3;
+}
+
+.btn-media > img {
+    max-height: 375px;
+}

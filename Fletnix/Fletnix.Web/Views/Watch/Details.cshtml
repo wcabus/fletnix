@@ -1,0 +1,61 @@
+﻿@using Fletnix.Domain
+@model MediaStream
+@{
+    ViewBag.Title = "Movie Details";
+}
+@helper FormatDuration(TimeSpan duration)
+{
+    if (duration.Hours > 0)
+    {
+        @duration.Hours @:h 
+    }
+    
+    @duration.Minutes @:m
+}
+@helper GetCelebrityInfo(Celebrity celebrity)
+{
+    var fullName = string.Format("{0} {1}", celebrity.FirstName, celebrity.LastName);
+    if (string.IsNullOrEmpty(celebrity.ImdbId))
+    {
+        @fullName
+    }
+    else
+    {
+        <a href="http://www.imdb.com/name/@celebrity.ImdbId/">@fullName</a>
+    }
+}
+<h2>@Model.Title</h2>
+<div class="row">
+    @if (!string.IsNullOrEmpty(Model.ImageUri)) {
+        <div class="col-md-2">
+            <img src="@Model.ImageUri" alt="@Model.Title" class="img-responsive img-thumbnail" />
+        </div>
+    }
+    <div class="col-md-10">
+        <h5>@FormatDuration(Model.Length)</h5>
+        @if (!string.IsNullOrWhiteSpace(Model.Synopsis)) {
+            <p>@Model.Synopsis</p>
+        }
+        <br />
+        @if (Model.Genres.Any()) {
+            <h4>Genres</h4>
+            <ul>
+                @foreach(var genre in Model.Genres)
+                {
+                    <li>@genre.Name</li>
+                }
+            </ul>
+        }
+        <h4>Cast</h4>
+        @foreach (var grouping in Model.Cast.GroupBy(c => c.MediaRoleId).OrderBy(c => c.Key))
+        {
+            <h5>@grouping.First().MediaRole.Name</h5>
+            <ul>
+                @foreach(var member in grouping)
+                {
+                    <li>@GetCelebrityInfo(member.Celebrity)</li>
+                }
+            </ul>
+        }
+    </div>
+</div>

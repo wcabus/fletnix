@@ -9,11 +9,13 @@
     @foreach (var movie in Model.Movies)
     {
         <div class="col-md-2">
-            <h4>@movie.Title</h4>
-            @if (!string.IsNullOrEmpty(movie.ImageUri))
-            {
-                <img src="@movie.ImageUri" alt="@movie.Title" />
-            }
+            <a class="btn btn-block btn-media" href="@Url.Action("Movie", "Details", new { id = movie.Id })">
+                <h4>@movie.Title</h4>
+                @if (!string.IsNullOrEmpty(movie.ImageUri))
+                {
+                    <img src="@movie.ImageUri" alt="@movie.Title" class="img-responsive img-thumbnail" />
+                }
+            </a>
         </div>
     }
 </div>
@@ -23,11 +25,13 @@
     @foreach (var tvShow in Model.TvShows)
     {
         <div class="col-md-2">
-            <h4>@tvShow.Title</h4>
-            @if (!string.IsNullOrEmpty(tvShow.ImageUri))
-            {
-                <img src="@tvShow.ImageUri" alt="@tvShow.Title" />
-            }
+            <a class="btn btn-block btn-media" href="@Url.Action("TvShow", "Details", new { id = tvShow.Id })">
+                <h4>@tvShow.Title</h4>
+                @if (!string.IsNullOrEmpty(tvShow.ImageUri))
+                {
+                    <img src="@tvShow.ImageUri" alt="@tvShow.Title" class="img-responsive img-thumbnail" />
+                }
+            </a>
         </div>
     }
 </div>
