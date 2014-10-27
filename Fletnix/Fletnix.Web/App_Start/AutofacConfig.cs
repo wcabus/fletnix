@@ -4,6 +4,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Fletnix.EF;
 using Fletnix.EF.Repositories;
+using Fletnix.EF.Services;
 
 namespace Fletnix.Web
 {
@@ -13,8 +14,14 @@ namespace Fletnix.Web
         {
             var builder = new ContainerBuilder();
 
+            //DB Context
             builder.RegisterType<FletnixDbContext>().AsSelf().InstancePerRequest();
+
+            //Repositories
             builder.RegisterGeneric(typeof(BaseRepository<>)).AsImplementedInterfaces().InstancePerRequest();
+
+            //Services
+            builder.RegisterType<SubscriptionService>().AsImplementedInterfaces().InstancePerRequest();
 
             builder.RegisterModelBinderProvider();
             builder.RegisterModelBinders();

@@ -1,28 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using Fletnix.Domain;
-using Fletnix.Domain.Repositories;
+using Fletnix.Domain.Services;
+using Microsoft.AspNet.Identity;
 
 namespace Fletnix.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IBaseRepository<SubscriptionModel> _subscriptionModelRepository;
+        private readonly ISubscriptionService _subscriptionService;
 
-        public HomeController(IBaseRepository<SubscriptionModel> subscriptionModelRepository)
+        public HomeController(ISubscriptionService subscriptionService)
         {
-            _subscriptionModelRepository = subscriptionModelRepository;
+            _subscriptionService = subscriptionService;
         }
 
         public async Task<ActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                // If this user has a subscription, redirect him/her to the dashboard instead
+                var subscription = await _subscriptionService.GetCurrentSubscriptionAsync(User.Identity.GetUserId());
+                if (subscription != null && subscription.IsActive)
+                {
+                    return RedirectToAction("Index", "Watch");
+                }
+            }
+
             ViewBag.Landing = "landing";
-            return View(await _subscriptionModelRepository.Get().Include("Options.SubscriptionOptionTemplate").ToListAsync());
+            return View(await _subscriptionService.GetSubscriptionModelsAsync());
         }
 
         public ActionResult About()

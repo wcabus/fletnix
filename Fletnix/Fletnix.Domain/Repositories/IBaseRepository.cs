@@ -9,7 +9,6 @@ namespace Fletnix.Domain.Repositories
     {
         IQueryable<T> Get();
         IQueryable<T> Get(Expression<Func<T, bool>> whereExpression);
-        IQueryable<TSelect> Get<TSelect>(Expression<Func<T, TSelect>> selectExpression);
         IQueryable<TSelect> Get<TSelect>(Expression<Func<T, bool>> whereExpression, Expression<Func<T, TSelect>> selectExpression);
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> whereExpression);
         T Add(T entity);
