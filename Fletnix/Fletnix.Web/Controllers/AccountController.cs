@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Fletnix.Domain;
+using Fletnix.Domain.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -16,15 +16,18 @@ namespace Fletnix.Web.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private readonly IBaseRepository<User> _userRepository;
 
-        public AccountController()
+        public AccountController(IBaseRepository<User> userRepository)
         {
+            _userRepository = userRepository;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IBaseRepository<User> userRepository)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userRepository = userRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -49,7 +52,7 @@ namespace Fletnix.Web.Controllers
         }
 
         private ApplicationSignInManager _signInManager;
-
+        
         public ApplicationSignInManager SignInManager
         {
             get
@@ -77,7 +80,8 @@ namespace Fletnix.Web.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    // Because we can't access User.Identity until after the current request ends, we'll move that logic into CompleteProfile
+                    return RedirectToAction("CompleteProfile", new { ReturnUrl = returnUrl });
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -160,15 +164,62 @@ namespace Fletnix.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    // Create a full user profile
+                    var userProfile = _userRepository.Add(new User
+                    {
+                        Id = User.Identity.GetUserId(),
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        MemberSince = DateTime.UtcNow
+                    });
+                    await _userRepository.SaveChangesAsync();
 
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/CompleteProfile
+        public async Task<ActionResult> CompleteProfile(string returnUrl)
+        {
+            // Check if this user is known in the Fletnix DB. If not, ask him/her to complete the profile.
+            var userId = User.Identity.GetUserId();
+            var user = await _userRepository.FirstOrDefaultAsync(u => u.Id == userId);
+            if (user != null)
+            {
+                return RedirectToLocal(returnUrl);
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        //
+        // POST: /Account/CompleteProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CompleteProfile(CompleteProfileViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                // Create a full user profile
+                var user = _userRepository.Add(new User
+                {
+                    Id = User.Identity.GetUserId(),
+                    Email = User.Identity.GetUserName(), //GetUserName still returns the email address in this case.
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    MemberSince = DateTime.UtcNow
+                });
+                await _userRepository.SaveChangesAsync();
+
+                return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
@@ -405,7 +456,7 @@ namespace Fletnix.Web.Controllers
         {
             return View();
         }
-
+        
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

@@ -64,21 +64,44 @@ namespace Fletnix.Web.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter your email address.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Please enter your first name.")]
+        [StringLength(128)]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name.")]
+        [StringLength(128)]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Please enter a password.")]
+        [StringLength(100, ErrorMessage = "Your password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Choose a password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirm your password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class CompleteProfileViewModel
+    {
+        [Required(ErrorMessage = "Please enter your first name.")]
+        [StringLength(128)]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Please enter your last name.")]
+        [StringLength(128)]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
     }
 
     public class ResetPasswordViewModel
