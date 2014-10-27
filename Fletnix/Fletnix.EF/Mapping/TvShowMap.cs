@@ -9,7 +9,7 @@ namespace Fletnix.EF.Mapping
         {
             ToTable("TvShow");
 
-            HasMany(t => t.Genres).WithMany().Map(m => m.ToTable("TvShowGenre").MapLeftKey("GenreId").MapRightKey("TvShowId"));
+            HasMany(t => t.Genres).WithMany().Map(m => m.ToTable("TvShowGenre").MapLeftKey("TvShowId").MapRightKey("GenreId"));
             HasMany(t => t.Seasons).WithRequired(s => s.TvShow).HasForeignKey(s => s.TvShowId).WillCascadeOnDelete();
         }
     }
