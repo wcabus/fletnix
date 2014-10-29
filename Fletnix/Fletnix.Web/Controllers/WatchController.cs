@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fletnix.Domain.Services;
 using Fletnix.Web.Models;
+using Fletnix.Web.Results;
 using Microsoft.AspNet.Identity;
 
 namespace Fletnix.Web.Controllers
@@ -55,6 +58,30 @@ namespace Fletnix.Web.Controllers
             }
 
             return View("Details", mediaStream);
+        }
+
+        public async Task<ActionResult> Play(int id)
+        {
+            var mediaStream = await _videoService.GetMediaStreamForPlayerAsync(id);
+            if (mediaStream == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(mediaStream);
+        }
+
+        public ActionResult Stream(Guid id)
+        {
+            var path = Path.Combine("c:\\streams", id.ToString());
+            if (!System.IO.File.Exists(path))
+            {
+                return null;
+            }
+
+            var fi = new FileInfo(path);
+            Response.AppendHeader("Accept-Ranges", "bytes");
+            return new RangeFilePathResult("video/mp4", fi.FullName, fi.LastWriteTimeUtc, fi.Length);
         }
     }
 }

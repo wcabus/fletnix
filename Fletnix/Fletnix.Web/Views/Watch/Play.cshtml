@@ -1,0 +1,16 @@
+﻿@model Fletnix.Domain.MediaStream
+
+@{
+    if (Model.ShowSeason != null)
+    {
+        ViewBag.Title = string.Format("{0}: {1}", Model.ShowSeason.TvShow.Title, Model.Title);
+    }
+    else {
+        ViewBag.Title = Model.Title;
+    }
+    Layout = "~\\Views\\Shared\\_PlayerLayout.cshtml";
+}
+
+<video controls="controls" autoplay="autoplay">
+    <source type="video/mp4" src="@Url.Action("Stream", new { id = Model.StreamId })" />
+</video>

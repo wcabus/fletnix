@@ -1,0 +1,29 @@
+﻿@helper PrefixTitle()
+{
+    if (!string.IsNullOrWhiteSpace(ViewBag.Title))
+    {
+        @ViewBag.Title@: -
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@PrefixTitle()Fletnix</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="player">
+    <div class="container-fluid">
+        <div class="top-left">
+            <a href="@Url.Action("Index", "Watch")"><img src="/Content/Images/Fletnix.png" /></a>
+        </div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

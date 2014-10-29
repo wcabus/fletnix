@@ -3,6 +3,30 @@
     background: #ededed;
 }
 
+.player {
+    padding: 0;
+    margin: 0;
+    background: #000000;
+}
+
+.player > .container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+.player video {
+    max-width: 99vw;
+    max-height: 99vh;
+    width: 100vw;
+}
+
+div.top-left {
+    top: 1em;
+    left: 1em;
+    position: fixed;
+    z-index: 99;
+}
+
 .navbar.navbar-transparent {
     background: transparent;
     height: 100px;

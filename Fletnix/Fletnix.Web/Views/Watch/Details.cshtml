@@ -32,6 +32,9 @@
         </div>
     }
     <div class="col-md-10">
+        <a href="@Url.Action("Play", new { id = Model.Id })" class="btn btn-default">
+            <i class="glyphicon glyphicon-play-circle"></i>
+        </a>
         <h5>@FormatDuration(Model.Length)</h5>
         @if (!string.IsNullOrWhiteSpace(Model.Synopsis)) {
             <p>@Model.Synopsis</p>

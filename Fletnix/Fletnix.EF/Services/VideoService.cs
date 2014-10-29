@@ -38,6 +38,13 @@ namespace Fletnix.EF.Services
                 FirstOrDefaultAsync();
         }
 
+        public Task<MediaStream> GetMediaStreamForPlayerAsync(int id)
+        {
+            return _mediaStreamRepository.Get(m => m.Id == id).
+                Include(m => m.ShowSeason.TvShow).
+                FirstOrDefaultAsync();
+        }
+
         public Task<TvShow> GetTvShowAsync(int id)
         {
             return _tvShowRepository.Get(m => m.Id == id).

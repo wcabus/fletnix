@@ -9,5 +9,7 @@ namespace Fletnix.Domain.Services
         Task<List<TvShow>> GetTvShowsAsync();
         Task<MediaStream> GetMediaStreamAsync(int id);
         Task<TvShow> GetTvShowAsync(int id);
+
+        Task<MediaStream> GetMediaStreamForPlayerAsync(int id);
     }
 }

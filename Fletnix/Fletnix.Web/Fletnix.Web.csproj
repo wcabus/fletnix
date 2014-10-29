@@ -188,6 +188,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\RangeFilePathResult.cs" />
+    <Compile Include="Results\RangeFileResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +269,8 @@
     <Content Include="Views\Watch\Index.cshtml" />
     <Content Include="Views\Watch\Details.cshtml" />
     <Content Include="Views\Watch\TvShowDetails.cshtml" />
+    <Content Include="Views\Watch\Play.cshtml" />
+    <Content Include="Views\Shared\_PlayerLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
