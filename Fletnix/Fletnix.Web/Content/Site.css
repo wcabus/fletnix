@@ -1,17 +1,26 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     background: #ededed;
 }
 
-div.navbar {
-    background: #c0c0c0;
+.navbar.navbar-transparent {
+    background: transparent;
+    height: 100px;
+}
+
+.navbar.navbar-transparent a {
+    color: #8b9dc3;
+}
+
+.navbar.navbar-transparent .navbar-nav > li > a {
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -80,4 +89,18 @@ footer.fixed {
 .btn-fb:hover {
     background: #8b9dc3;
     color: white;
+}
+
+.btn-media {
+    white-space: initial;
+    height: 400px;
+    border: 3px solid transparent;
+}
+
+.btn-media:hover {
+    border: 3px solid #8b9dc3;
+}
+
+.btn-media > img {
+    max-height: 375px;
 }
