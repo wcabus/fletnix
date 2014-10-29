@@ -1,14 +1,20 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     background: #ededed;
 }
 
-div.navbar {
-    background: #c0c0c0;
+.navbar.navbar-transparent {
+    background: transparent;
+    height: 100px;
 }
 
-div.navbar.navbar-transparent {
-    background: transparent;
+.navbar.navbar-transparent a {
+    color: #8b9dc3;
+}
+
+.navbar.navbar-transparent .navbar-nav > li > a {
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 
@@ -16,7 +22,6 @@ div.navbar.navbar-transparent {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
