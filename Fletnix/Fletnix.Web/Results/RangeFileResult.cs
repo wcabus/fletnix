@@ -28,7 +28,7 @@ namespace Fletnix.Web.Results
       "ddd MMM d HH':'mm':'ss yyyy"
     };
 
-        const int BufferSize = 64 * 1024;
+        const int BufferSize = 512 * 1024;
 
         /// <summary>
         /// Gets the content type to use for the response.

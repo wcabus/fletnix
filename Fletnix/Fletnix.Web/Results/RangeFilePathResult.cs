@@ -10,7 +10,7 @@ namespace Fletnix.Web.Results
     /// </summary>
     public class RangeFilePathResult : RangeFileResult
     {
-        private const int _bufferSize = 4096;
+        private const int BufferSize = 4096;
 
         /// <summary>
         /// Initializes a new instance of the RangeFilePathResult class.
@@ -49,10 +49,10 @@ namespace Fletnix.Web.Results
             {
                 fileStream.Seek(rangeStartIndex, SeekOrigin.Begin);
                 int num = Convert.ToInt32(rangeEndIndex - rangeStartIndex) + 1;
-                byte[] buffer = new byte[4096];
+                byte[] buffer = new byte[BufferSize];
                 while (num > 0)
                 {
-                    int count = fileStream.Read(buffer, 0, 4096 < num ? 4096 : num);
+                    int count = fileStream.Read(buffer, 0, BufferSize < num ? BufferSize : num);
                     response.OutputStream.Write(buffer, 0, count);
                     num -= count;
                 }

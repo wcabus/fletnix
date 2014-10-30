@@ -80,7 +80,6 @@ namespace Fletnix.Web.Controllers
             }
 
             var fi = new FileInfo(path);
-            Response.AppendHeader("Accept-Ranges", "bytes");
             return new RangeFilePathResult("video/mp4", fi.FullName, fi.LastWriteTimeUtc, fi.Length);
         }
     }
