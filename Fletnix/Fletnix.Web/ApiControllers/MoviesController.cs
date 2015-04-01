@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Fletnix.Domain.Services;
+using Fletnix.Web.ApiModels;
 
 namespace Fletnix.Web.ApiControllers
 {
@@ -22,7 +19,9 @@ namespace Fletnix.Web.ApiControllers
         [Route]
         public async Task<IHttpActionResult> Get()
         {
-            return Ok(await _service.GetMoviesAsync());
+            return Ok(
+                (await _service.GetMoviesAsync()).Select(Movie.FromDomain)
+            );
         }
 
         [Route("{id:int}")]
@@ -34,7 +33,7 @@ namespace Fletnix.Web.ApiControllers
                 return NotFound();
             }
 
-            return Ok(movie);
+            return Ok(Movie.FromDomain(movie));
         }
     }
 }
