@@ -108,5 +108,4 @@ Backup*/
 UpgradeLog*.XML
 
 *.zip
-*.mdf
-*.ldf
+*.[lm]df

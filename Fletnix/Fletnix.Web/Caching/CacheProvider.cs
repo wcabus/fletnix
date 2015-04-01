@@ -20,7 +20,10 @@ namespace Fletnix.Web.Caching
             if (data == null)
             {
                 data = retrieveMethod();
-                HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expiration, CacheItemPriority.Normal, null);
+                if (data != null)
+                {
+                    HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expiration, CacheItemPriority.Normal, null);
+                }
             }
 
             return data;
@@ -38,7 +41,10 @@ namespace Fletnix.Web.Caching
             if (data == null)
             {
                 data = await retrieveMethod();
-                HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expiration, CacheItemPriority.Normal, null);
+                if (data != null)
+                {
+                    HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expiration, CacheItemPriority.Normal, null);
+                }
             }
 
             return data;
@@ -47,7 +53,10 @@ namespace Fletnix.Web.Caching
         public void Set<T>(string key, T data, TimeSpan expires) where T : class
         {
             HttpRuntime.Cache.Remove(key);
-            HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expires, CacheItemPriority.Normal, null);
+            if (data != null)
+            {
+                HttpRuntime.Cache.Add(key, data, null, System.Web.Caching.Cache.NoAbsoluteExpiration, expires, CacheItemPriority.Normal, null);
+            }
         }
 
         public void Remove(string key)

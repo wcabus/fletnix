@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Fletnix.Domain.Caching;
 using Fletnix.EF;
 using Fletnix.EF.Repositories;
@@ -34,13 +36,22 @@ namespace Fletnix.Web
 
             builder.RegisterType<Cache>().AsSelf().SingleInstance();
 
+            // MVC
             builder.RegisterModelBinderProvider();
             builder.RegisterModelBinders();
 
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            builder.RegisterControllers(currentAssembly);
+
+            // Web Api
+            var config = GlobalConfiguration.Configuration;
+            builder.RegisterApiControllers(currentAssembly);
 
             var container = builder.Build();
+            // MVC
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            // Web Api
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         } 
     }
 }
