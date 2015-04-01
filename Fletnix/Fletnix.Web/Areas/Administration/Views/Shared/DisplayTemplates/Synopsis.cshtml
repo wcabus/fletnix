@@ -1,0 +1,9 @@
+﻿@model string
+@if (string.IsNullOrEmpty(Model) || Model.Length < 50)
+{
+    @Model
+}
+else
+{
+    @Model.Substring(0, 50)@:...
+}

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 using Fletnix.Domain.Services;
 using Microsoft.AspNet.Identity;
 
@@ -26,10 +27,17 @@ namespace Fletnix.Web.Controllers
                 }
             }
 
-            ViewBag.Landing = "landing";
-            return View(await _subscriptionService.GetSubscriptionModelsAsync());
+            return RedirectToAction("Subscriptions");
         }
 
+        [OutputCache(Duration = 3600, VaryByParam = "none")]
+        public async Task<ActionResult> Subscriptions()
+        {
+            ViewBag.Landing = "landing";
+            return View("Index", await _subscriptionService.GetSubscriptionModelsAsync());
+        }
+
+        [OutputCache(Duration = 123456789, VaryByParam = "none")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -41,6 +49,11 @@ namespace Fletnix.Web.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult PageNotFound()
+        {
             return View();
         }
     }

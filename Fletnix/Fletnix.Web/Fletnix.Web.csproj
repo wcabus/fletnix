@@ -16,10 +16,10 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44305</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -175,6 +175,16 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\CelebrityController.cs" />
+    <Compile Include="Areas\Administration\Controllers\GenresController.cs" />
+    <Compile Include="Areas\Administration\Controllers\MoviesController.cs" />
+    <Compile Include="Areas\Administration\Models\CelebrityEditor.cs" />
+    <Compile Include="Areas\Administration\Models\GenreModel.cs" />
+    <Compile Include="Areas\Administration\Models\GenreSelection.cs" />
+    <Compile Include="Areas\Administration\Models\Movie.cs" />
+    <Compile Include="Areas\Administration\Models\MovieDetails.cs" />
+    <Compile Include="Caching\CacheProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -208,6 +218,21 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Administration\Views\web.config" />
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administration\Views\Celebrity\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Celebrity\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Celebrity\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\Image.cshtml" />
+    <Content Include="Areas\Administration\Views\Celebrity\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Movies\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\Synopsis.cshtml" />
+    <Content Include="Areas\Administration\Views\Movies\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\Movies\Edit.cshtml" />
+    <Content Include="Areas\Administration\Views\Movies\Details.cshtml" />
+    <Content Include="Areas\Administration\Views\Genres\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\Temp.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -219,6 +244,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.3.0.debug.js" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -271,8 +298,16 @@
     <Content Include="Views\Watch\TvShowDetails.cshtml" />
     <Content Include="Views\Watch\Play.cshtml" />
     <Content Include="Views\Shared\_PlayerLayout.cshtml" />
+    <Content Include="Views\Home\PageNotFound.cshtml" />
+    <Content Include="Views\Watch\IndexNew.cshtml" />
+    <Content Include="Views\Watch\Movies.cshtml" />
+    <Content Include="Views\Watch\MovieLink.cshtml" />
+    <Content Include="Views\Watch\Movie.cshtml" />
+    <Content Include="Views\Watch\Knockout.cshtml" />
+    <Content Include="Views\Home\AjaxTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

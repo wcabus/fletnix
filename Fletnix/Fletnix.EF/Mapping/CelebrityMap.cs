@@ -10,6 +10,7 @@ namespace Fletnix.EF.Mapping
             ToTable("Celebrity");
 
             Property(c => c.ImdbId).IsUnicode(false);
+            Property(c => c.ImageUri).IsUnicode(false);
         }
     }
 }

@@ -162,18 +162,18 @@ namespace Fletnix.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
                     // Create a full user profile
                     var userProfile = _userRepository.Add(new User
                     {
-                        Id = User.Identity.GetUserId(),
+                        Id = user.Id,
                         Email = model.Email,
                         FirstName = model.FirstName,
                         LastName = model.LastName,
                         MemberSince = DateTime.UtcNow
                     });
                     await _userRepository.SaveChangesAsync();
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");
                 }

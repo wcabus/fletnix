@@ -1,0 +1,7 @@
+﻿@model List<Fletnix.Domain.MediaStream>
+@foreach (var movie in Model)
+{
+    <div class="col-md-2">
+        @Html.Partial("MovieLink", movie)
+    </div>
+}

@@ -1,0 +1,5 @@
+﻿@model Fletnix.Domain.MediaStream
+<a class="btn btn-block btn-media" href="@Url.Action("Movie", "Details", new { id = Model.Id })">
+    @Html.Partial("Movie", Model)
+</a>
+

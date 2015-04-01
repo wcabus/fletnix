@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+<h3>Movies</h3>
+<div class="row">
+    @{
+        Html.RenderAction("Movies");
+    }
+</div>
+
+<h3>TV Shows</h3>
+<div class="row">
+    @*@foreach (var tvShow in Model.TvShows)
+    {
+        <div class="col-md-2">
+            <a class="btn btn-block btn-media" href="@Url.Action("TvShow", "Details", new { id = tvShow.Id })">
+                <h4>@tvShow.Title</h4>
+                @if (!string.IsNullOrEmpty(tvShow.ImageUri))
+                {
+                    <img src="@tvShow.ImageUri" alt="@tvShow.Title" class="img-responsive img-thumbnail" />
+                }
+            </a>
+        </div>
+    }*@
+</div>

@@ -1,0 +1,6 @@
+﻿@model Fletnix.Domain.MediaStream
+<h4>@Model.Title</h4>
+@if (!string.IsNullOrEmpty(Model.ImageUri))
+{
+    <img src="@Model.ImageUri" alt="@Model.Title" class="img-responsive img-thumbnail" />
+}

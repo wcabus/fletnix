@@ -2,9 +2,12 @@
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Fletnix.Domain.Caching;
 using Fletnix.EF;
 using Fletnix.EF.Repositories;
 using Fletnix.EF.Services;
+using Fletnix.Web.Areas.Administration.Controllers;
+using Fletnix.Web.Caching;
 
 namespace Fletnix.Web
 {
@@ -21,8 +24,15 @@ namespace Fletnix.Web
             builder.RegisterGeneric(typeof(BaseRepository<>)).AsImplementedInterfaces().InstancePerRequest();
 
             //Services
-            builder.RegisterType<SubscriptionService>().AsImplementedInterfaces().InstancePerRequest();
-            builder.RegisterType<VideoService>().AsImplementedInterfaces().InstancePerRequest();
+            builder.RegisterAssemblyTypes(typeof(VideoService).Assembly)
+                .Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
+
+            builder.RegisterType<CacheProvider>().
+                As<ICacheProvider>().SingleInstance();
+
+            builder.RegisterType<Cache>().AsSelf().SingleInstance();
 
             builder.RegisterModelBinderProvider();
             builder.RegisterModelBinders();

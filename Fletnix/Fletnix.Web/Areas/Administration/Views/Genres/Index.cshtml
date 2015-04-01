@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Genres";
+}
+
+<h2>Genres</h2>
+<div class="form-inline">
+    <h4>New genre:</h4>
+    <input type="text" data-bind="value: newName, valueUpdate: 'keyup'" class="form-control" />
+    <button type="button" class="btn btn-primary" data-bind="click: create, disable: isNewNameEmpty">
+        <i class="glyphicon glyphicon-plus"></i> Add
+    </button>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-5">
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            <tbody data-bind="foreach: genres">
+                <tr data-bind="css: selected" class="form-inline">
+                    <!-- ko if: editable -->
+                    <td>
+                        <input type="text" data-bind="value: name" class="form-control" autofocus maxlength="50" />
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" title="Save" class="btn btn-success" data-bind="click: save">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>
+                            </button>
+                            <button type="button" title="Cancel" class="btn btn-warning" data-bind="click: cancelEdit">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <!-- /ko -->
+                    <!-- ko ifnot: editable -->
+                    <td>
+                        <span class="form-control-static" data-bind="text: name"></span>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" title="Edit" class="btn btn-primary" data-bind="click: edit">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" title="Delete" class="btn btn-danger" data-bind="click: $root.remove">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/knockout")
+    <script type="text/javascript">
+        (function ($, ko) {
+
+            function Genre(data) {
+                var self = this;
+                this.id = data.id || 0;
+                this.originalName = '';
+                this.name = ko.observable(data.name || '');
+
+                this.editable = ko.observable(false);
+
+                this.selected = ko.computed(function () {
+                    return self.editable() ? 'selected' : '';
+                });
+
+                this.edit = function () {
+                    self.originalName = self.name();
+                    self.editable(true);
+                };
+
+                this.cancelEdit = function () {
+                    self.name(self.originalName);
+                    self.editable(false);
+                };
+
+                this.save = function () {
+                    $.ajax({
+                        url: '/Administration/Genres/SaveGenre',
+                        data: JSON.stringify({ id: self.id, name: self.name() }),
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json'
+                    }).done(function () {
+                        self.editable(false);
+                    });
+                };
+            }
+
+            // viewmodel
+            function ViewModel() {
+                var self = this;
+                this.genres = ko.observableArray();
+
+                this.newName = ko.observable('');
+
+                this.isNewNameEmpty = ko.computed(function () {
+                    return self.newName() === '';
+                });
+
+                this.create = function () {
+                    $.ajax({
+                        url: '/Administration/Genres/SaveGenre',
+                        data: JSON.stringify({ id: 0, name: self.newName() }),
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json'
+                    }).done(function (data) {
+                        self.newName('');
+                        self.genres.push(new Genre(data));
+                    });
+                }
+
+                this.remove = function (item) {
+                    $.ajax({
+                        url: '/Administration/Genres/DeleteGenre/' + item.id,
+                        type: 'DELETE',
+                        dataType: 'json',
+                        contentType: 'application/json'
+                    }).done(function () {
+                        self.genres.remove(item);
+                    });
+                };
+
+                this.load = function () {
+                    $.getJSON('/Administration/Genres/GetGenres').done(function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            self.genres.push(new Genre(data[i]));
+                        }
+                    });
+                }
+
+                self.load();
+            }
+
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
+
+        })(jQuery, ko);
+    </script>
+}

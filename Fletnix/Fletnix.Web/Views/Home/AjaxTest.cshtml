@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "AjaxTest";
+}
+
+<h2>AjaxTest</h2>
+
+<div id="target"></div>
+
+@using(Ajax.BeginForm(new AjaxOptions
+{
+    UpdateTargetId = "target"
+}))
+{
+    <input type="text" id="bla" name="bla"/>
+    <input type="submit"/>
+}

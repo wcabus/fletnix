@@ -26,7 +26,10 @@ namespace Fletnix.EF.Services
 
         public Task<Subscription> GetCurrentSubscriptionAsync(string userId)
         {
-            return _subscriptionRepository.Get(s => s.User.Id == userId).Include(s => s.SubscriptionModel).FirstOrDefaultAsync();
+            return _subscriptionRepository.
+                Get(s => s.User.Id == userId).
+                Include(s => s.SubscriptionModel).
+                FirstOrDefaultAsync();
         }
 
         public Task<SubscriptionModel> GetSubscriptionModelAsync(int modelId)
@@ -34,9 +37,10 @@ namespace Fletnix.EF.Services
             return _subscriptionModelRepository.FirstOrDefaultAsync(m => m.Id == modelId);
         }
 
-        public Task<List<SubscriptionModel>> GetSubscriptionModelsAsync()
+        public async Task<List<SubscriptionModel>> GetSubscriptionModelsAsync()
         {
-            return _subscriptionModelRepository.Get().Include("Options.SubscriptionOptionTemplate").ToListAsync();
+            await Task.Delay(3000);
+            return await _subscriptionModelRepository.Get().Include("Options.SubscriptionOptionTemplate").ToListAsync();
         }
 
         public async Task<Subscription> StartSubscriptionAsync(string userId, SubscriptionModel subscriptionModel)

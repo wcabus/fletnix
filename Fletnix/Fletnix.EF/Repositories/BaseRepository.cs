@@ -48,9 +48,15 @@ namespace Fletnix.EF.Repositories
 
         public void Update(T entity)
         {
-            _context.Entry(entity).State = EntityState.Modified;
-        }
+            var entry = _context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                _context.Set<T>().Attach(entity);
+            }
 
+            entry.State = EntityState.Modified;
+        }
+        
         public T Remove(T entity)
         {
             return _context.Set<T>().Remove(entity);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fletnix.Domain.Services;
@@ -15,7 +16,9 @@ namespace Fletnix.Web.Controllers
         private readonly ISubscriptionService _subscriptionService;
         private readonly IVideoService _videoService;
 
-        public WatchController(ISubscriptionService subscriptionService, IVideoService videoService)
+        public WatchController(
+            ISubscriptionService subscriptionService, 
+            IVideoService videoService)
         {
             _subscriptionService = subscriptionService;
             _videoService = videoService;
@@ -81,6 +84,28 @@ namespace Fletnix.Web.Controllers
 
             var fi = new FileInfo(path);
             return new RangeFilePathResult("video/mp4", fi.FullName, fi.LastWriteTimeUtc, fi.Length);
+        }
+
+        public ActionResult Index2()
+        {
+            return View("Knockout");
+        }
+
+        public async Task<ActionResult> GetMovies()
+        {
+            var movies = await _videoService.GetMoviesAsync();
+            
+            return Json(movies.Select(m => new
+            {
+                id = m.Id,
+                title = m.Title,
+                imageUri = m.ImageUri
+            }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult PostAjax()
+        {
+            return Content("<h3>Success</h3>", "text/html");
         }
     }
 }

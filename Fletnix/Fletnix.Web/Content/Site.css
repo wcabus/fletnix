@@ -79,6 +79,8 @@ body.landing {
     background: #b0e0e6;
     background: rgba(176, 224, 230, .6);
     border: 1px solid steelblue;
+    -ms-border-radius: 15px;
+    border-radius: 15px;
     margin: 0 6px;
     padding: 0 -6px;
 }
@@ -128,4 +130,8 @@ footer.fixed {
 
 .btn-media > img {
     max-height: 375px;
+}
+
+tr.selected, tr.selected td {
+    background: rgba(40, 128, 40, 0.1) !important;
 }

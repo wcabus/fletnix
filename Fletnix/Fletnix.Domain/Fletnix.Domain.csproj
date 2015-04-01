@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CacheKeys.cs" />
+    <Compile Include="Caching\Cache.cs" />
+    <Compile Include="Caching\ICacheProvider.cs" />
     <Compile Include="CastMember.cs" />
     <Compile Include="Celebrity.cs" />
     <Compile Include="Genre.cs" />
@@ -48,6 +51,9 @@
     <Compile Include="OptionType.cs" />
     <Compile Include="MediaRole.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Services\ICelebrityService.cs" />
+    <Compile Include="Services\IGenreService.cs" />
+    <Compile Include="Services\IMovieService.cs" />
     <Compile Include="Services\ISubscriptionService.cs" />
     <Compile Include="Services\IVideoService.cs" />
     <Compile Include="ShowSeason.cs" />

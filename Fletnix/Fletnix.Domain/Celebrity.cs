@@ -16,5 +16,8 @@ namespace Fletnix.Domain
 
         [StringLength(16)]
         public string ImdbId { get; set; }
+
+        [StringLength(512)]
+        public string ImageUri { get; set; }
     }
 }

@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+<h3>Movies</h3>
+<button type="button" class="btn btn-primary" data-bind="click: load">
+    <i class="glyphicon glyphicon-refresh"></i> Load movies
+</button>
+<div class="row" data-bind="foreach: movies">
+    <div class="col-md-2">
+        <a class="btn btn-block btn-media" data-bind="attr: { href: linkToDetails }">
+            <h4 data-bind="text: title"></h4>
+            <!-- ko if: hasImageUri -->
+            <img data-bind="attr: { src: imageUri, alt: title }"
+                 class="img-responsive img-thumbnail" />
+            <!-- /ko -->
+        </a>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/knockout")
+    <script type="text/javascript">
+        (function ($, ko) {
+            'use strict';
+
+            function Movie(data) {
+                this.id = data.id || 0;
+                this.title = data.title || '';
+                this.imageUri = data.imageUri || '';
+
+                this.hasImageUri = ko.computed(function () {
+                    return this.imageUri !== '';
+                }, this);
+
+                this.linkToDetails = ko.computed(function () {
+                    return '/Details/Movie/' + this.id;
+                }, this);
+            }
+
+            function ViewModel() {
+                var self = this;
+                this.movies = ko.observableArray();
+
+                this.load = function () {
+                    self.movies.removeAll();
+                    $.getJSON('/Watch/GetMovies').done(function(data) {
+                        for (var i = 0; i < data.length; i++) {
+                            self.movies.push(new Movie(data[i]));
+                        }
+                    });
+                };
+            }
+
+            var vm = new ViewModel();
+            ko.applyBindings(vm);
+        })(jQuery, ko);
+    </script>
+}

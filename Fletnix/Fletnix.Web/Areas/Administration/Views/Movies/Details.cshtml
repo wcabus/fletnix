@@ -1,0 +1,89 @@
+﻿@model Fletnix.Web.Areas.Administration.Models.MovieDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h4>Movie</h4>
+<div class="row">
+    <div class="col-md-9">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Movie.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Movie.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Movie.Synopsis)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Movie.Synopsis)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Movie.Length)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Movie.Length)
+            </dd>
+        </dl>
+        <div class="form-horizontal">
+            <div class="form-group">
+                @foreach (var genre in Model.Genres)
+                {
+                    <div class="col-md-2">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="genre-checkbox" id="@string.Format("genre-{0}", genre.Id)" data-id="@genre.Id" checked="@genre.IsSelected" /> @genre.Name
+                            </label>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="form-group save-genres">
+                <button type="button" class="btn btn-success">
+                    <i class="glyphicon glyphicon-floppy-save"></i> Save Genres
+                </button>
+            </div>
+        </div>
+        <div id="genres-saved" class="alert alert-success" style="display:none;" role="alert">
+            The genres have been saved!
+        </div>
+    </div>
+    <div class="col-md-3">
+        @Html.DisplayFor(model => model.Movie.ImageUri)
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Movie.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@section scripts {
+    <script type="text/javascript">
+        (function () {
+            $('.save-genres').click(function () {
+                // Post an array of genre ID and checked state
+                var data = [];
+                $('input.genre-checkbox').each(function () {
+                    data.push({ id: $(this).data('id'), isSelected: $(this).prop('checked') });
+                });
+
+                $.when($.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("SaveGenres", new { id = Model.Movie.Id })',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: 'application/json'
+                })).then(function () {
+                    $('#genres-saved').show(100).delay(3000).hide(300);
+                });
+            });
+        })();
+    </script>
+}
